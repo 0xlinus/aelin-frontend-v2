@@ -147,6 +147,7 @@ const Create: NextPage = () => {
                       </BackButton>
                       {isFinalStep ? (
                         <ButtonGradient
+                          data-cy="pool-create-btn"
                           disabled={disableSubmit}
                           key={`${step}_button`}
                           onClick={() => {
@@ -157,6 +158,7 @@ const Create: NextPage = () => {
                         </ButtonGradient>
                       ) : (
                         <ButtonGradient
+                          data-cy="pool-create-next-btn"
                           disabled={!!currentStepError}
                           key={`${step}_button`}
                           onClick={() => moveStep('next')}
