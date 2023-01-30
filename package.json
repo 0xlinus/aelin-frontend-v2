@@ -18,7 +18,9 @@
     "sdk": "graphql-codegen --config codegen.js",
     "postinstall": "yarn typechain && yarn sdk",
     "create:csv": "node --experimental-json-modules --loader ts-node/esm scripts/generate-csv-for-merkle-tree.ts",
-    "create:nft:metadata": "node --experimental-json-modules --loader ts-node/esm scripts/generate-nft-metadata.ts"
+    "create:nft:metadata": "node --experimental-json-modules --loader ts-node/esm scripts/generate-nft-metadata.ts",
+    "e2e:local": "synpress run --noExit --browser chrome",
+    "e2e:ci": "start-server-and-test 'yarn dev' http-get://localhost:3000 'synpress run'"
   },
   "dependencies": {
     "@alch/alchemy-sdk": "^1.2.0",
@@ -33,6 +35,7 @@
     "@ethersproject/strings": "^5.6.0",
     "@ethersproject/units": "5.4.0",
     "@ethersproject/wallet": "^5.7.0",
+    "@faker-js/faker": "^7.6.0",
     "@graphql-codegen/typescript-graphql-request": "4.4.3",
     "@metamask/detect-provider": "^1.2.0",
     "@synthetixio/contracts-interface": "^2.67.0-alpha",
@@ -86,6 +89,7 @@
     "@graphql-codegen/typescript": "2.4.7",
     "@graphql-codegen/typescript-operations": "2.3.4",
     "@graphql-codegen/typescript-react-apollo": "3.2.10",
+    "@synthetixio/synpress": "^3.0.5",
     "@typechain/ethers-v5": "^9.0.0",
     "@types/cheerio": "^0.22.31",
     "@types/date-fns": "^2.6.0",
@@ -106,7 +110,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-sort-destructure-keys": "^1.4.0",
     "graphql-codegen-plugin-typescript-swr": "^0.8.1",
     "husky": "^7.0.4",
@@ -116,10 +120,14 @@
     "lint-staged": "^12.3.5",
     "prettier": "^2.5.1",
     "puppeteer": "^15.3.0",
+    "start-server-and-test": "^1.15.3",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.8.2",
     "typechain": "^7.0.1",
     "typescript": "4.6.2"
+  },
+  "resolutions": {
+    "pretty-format": "27.5.1"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
