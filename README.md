@@ -40,7 +40,7 @@ First you'll have to wait until all contracts are deployed and env variables are
 After that's done you're safe to export the generated envs:
 
 ```sh
-docker cp anvil:/usr/share/.env.generated ./.env.generated
+docker cp anvil:/usr/share/envs/.env.generated ./.env.generated
 ```
 
 ### 3 - Start UI
@@ -50,7 +50,8 @@ yarn dev
 ```
 
 ### 4 - Run E2E test?
->step 3 required!
+
+> step 3 required!
 
 ```sh
 yarn e2e:local
@@ -64,7 +65,6 @@ You'll need to add the local blockchain we've just started.
 
 ![image](https://user-images.githubusercontent.com/99757679/217300010-2c434eab-b803-47b9-ad99-fed875a45223.png)
 
-
 **Account**
 
 Import a test account using the private key located in the `env.generated`
@@ -74,7 +74,6 @@ Import a test account using the private key located in the `env.generated`
 EVERY TIME your (re)start `docker-compose`, remember to reset Metamask account, otherwise you'll see an error due to block height miss match.
 
 ![image](https://user-images.githubusercontent.com/99757679/217300243-1ef40d2d-72e7-4a1e-b113-716625dbb0cd.png)
-
 
 ## Requirements
 
