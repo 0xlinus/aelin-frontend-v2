@@ -50,6 +50,7 @@ yarn dev
 ```
 
 ### 4 - Run E2E test?
+>step 3 required!
 
 ```sh
 yarn e2e:local
@@ -59,15 +60,21 @@ yarn e2e:local
 
 **Network**
 
-You'll need to add a the local blockchain we've just started.
+You'll need to add the local blockchain we've just started.
+
+![image](https://user-images.githubusercontent.com/99757679/217300010-2c434eab-b803-47b9-ad99-fed875a45223.png)
+
 
 **Account**
 
 Import a test account using the private key located in the `env.generated`
 
-**Tip**
+**IMPORTANT**
 
-If you restart docker, remember to reset Metamask account, otherwise you'll see an error due to block height miss match
+EVERY TIME your (re)start `docker-compose`, remember to reset Metamask account, otherwise you'll see an error due to block height miss match.
+
+![image](https://user-images.githubusercontent.com/99757679/217300243-1ef40d2d-72e7-4a1e-b113-716625dbb0cd.png)
+
 
 ## Requirements
 
