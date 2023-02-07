@@ -247,6 +247,7 @@ function TokenDropdown(props: TokenDropdownProps) {
               options.map((item) => {
                 return (
                   <Item
+                    data-cy="token-selection-modal-item"
                     isActive={item.value.address === selectedToken?.value.address}
                     key={item.value.address}
                     onClick={() => {

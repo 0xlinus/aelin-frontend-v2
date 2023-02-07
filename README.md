@@ -1,31 +1,77 @@
-# Aelin Frontend v2
+# Aelin UI - Local Dev Environment
 
-### Run this application with Node 14
+## How it works
 
-1. Copy `.env.example` as `.env.local`
+To be able to run Aelin and all its components locally we'll need:
 
+1. **Blockchain node** with the latest Aelin contracts deployed
+2. **Graph node** with the latest Aelin subgraphs deployed
+3. **Aelin UI app** running
+
+### Blockchain
+
+We'll use **Anvil** for this, which is a ganache-style blockchain node implemented by **Foundry**. There's a script that will run before everything else, which will deploy all contracts and deps needed.
+
+### Graph node
+
+A simple graph node as shown [here](https://thegraph.academy/developers/local-development/)
+
+### Aelin UI
+
+The one in this repo.
+
+## Steps
+
+First run `yarn` and install all deps (check that there are no errors)
+
+### 1 - Start Anvil + Subgraph + Deploy Contracts
+
+```sh
+. ./start-local.sh
 ```
-$ cp .env.example .env.local
+
+### 3 - Use generated envs
+
+You'll need new envs containing contracts, private keys (test net dont worry!), etc.
+Run this command and then change `.env.generated` to `.env`
+
+First you'll have to wait until all contracts are deployed and env variables are generated. Check `docker-compose` logs and wait until you start to see a lot of activity.
+
+After that's done you're safe to export the generated envs:
+
+```sh
+docker cp anvil:/usr/share/.env.generated ./.env.generated
 ```
 
-2. Install dependencies
+### 3 - Start UI
 
-```
-$ yarn
-```
-
-3. Auto generate generate contracts types, subgraph types & queries SDK
-
-```
-$ yarn postinstall
+```sh
+yarn dev
 ```
 
-- NOTE: `postinstall` will generates an sdk file in `CODEGEN_OUTPUT_FILE` environment variable (default value: `types/generated/queries.ts` ) with all queries uses in the App.
+### 4 - Run E2E test?
 
-4. Run application as dev mode
-
-```
-$ yarn dev
+```sh
+yarn e2e:local
 ```
 
-5. Open `http://localhost:3000`
+## Metamask config
+
+**Network**
+
+You'll need to add a the local blockchain we've just started.
+
+**Account**
+
+Import a test account using the private key located in the `env.generated`
+
+**Tip**
+
+If you restart docker, remember to reset Metamask account, otherwise you'll see an error due to block height miss match
+
+## Requirements
+
+```sh
+docker
+docker-compose
+```

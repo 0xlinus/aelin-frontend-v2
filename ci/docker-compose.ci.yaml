@@ -57,7 +57,7 @@ services:
 
   contracts-deployer:
     image: linuzeth/aelin-contracts-deployer
-    command: ['. ./deploy-ci.sh']
+    command: ['. ./ci/deploy-ci.sh']
     depends_on:
       - anvil
     volumes:
@@ -76,68 +76,68 @@ services:
     networks:
       - x11
 
-  aelin-ui:
-    build:
-      context: ..
-      dockerfile: ./ci/Dockerfile
-    # command: ['. ./ci/add-envs.sh && yarn e2e:ci']
-    # depends_on:
-    #   - display
-    #   - video
-    entrypoint: []
-    command: >
-      bash -c '. ./ci/add-envs.sh && echo -n "======> local noVNC URL:
-      http://localhost:8080/vnc.html?autoconnect=true " && npx wait-on
-      http://display:8080 && echo -n "======> remote noVNC URL: " && curl -s
-      ngrok:4040/api/tunnels | jq -r .tunnels[0].public_url && yarn
-      e2e:ci'
-    environment:
-      - DISPLAY=display:0.0
-      - CYPRESS_DOCKER_RUN=true
-    ports:
-      - '3000:3000'
-    volumes:
-      - 'aelin-envs:/usr/share/'
-    depends_on:
-      subgraph-deployer:
-        condition: service_completed_successfully
-    networks:
-      - x11
+  # aelin-ui:
+  #   build:
+  #     context: ..
+  #     dockerfile: ./ci/Dockerfile
+  #   command: ['. ./ci/add-envs.sh && yarn dev']
+  #   # depends_on:
+  #   #   - display
+  #   #   - video
+  #   entrypoint: []
+  #   # command: >
+  #   #   bash -c '. ./ci/add-envs.sh && echo -n "======> local noVNC URL:
+  #   #   http://localhost:8080/vnc.html?autoconnect=true " && npx wait-on
+  #   #   http://display:8080 && echo -n "======> remote noVNC URL: " && curl -s
+  #   #   ngrok:4040/api/tunnels | jq -r .tunnels[0].public_url && yarn
+  #   #   e2e:ci'
+  #   environment:
+  #     - DISPLAY=display:0.0
+  #     - CYPRESS_DOCKER_RUN=true
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - 'aelin-envs:/usr/share/'
+  #   depends_on:
+  #     subgraph-deployer:
+  #       condition: service_completed_successfully
+  #   networks:
+  #     - x11
 
-  display:
-    container_name: display
-    image: synthetixio/display:457bb48776c3b14de232d9dda620ba9188dc40ac-base
-    environment:
-      - RUN_XTERM=no
-    ports:
-      - '8080:8080'
-    networks:
-      - x11
+  # display:
+  #   container_name: display
+  #   image: synthetixio/display:457bb48776c3b14de232d9dda620ba9188dc40ac-base
+  #   environment:
+  #     - RUN_XTERM=no
+  #   ports:
+  #     - '8080:8080'
+  #   networks:
+  #     - x11
 
-  ngrok:
-    profiles:
-      - ngrok
-    container_name: ngrok
-    image: synthetixio/ngrok:457bb48776c3b14de232d9dda620ba9188dc40ac-base
-    ports:
-      - '4040:4040'
-    command: ['ngrok', 'http', 'display:8080', '--authtoken', '${NGROK_AUTH}']
-    depends_on:
-      - display
-    networks:
-      - x11
+  # ngrok:
+  #   profiles:
+  #     - ngrok
+  #   container_name: ngrok
+  #   image: synthetixio/ngrok:457bb48776c3b14de232d9dda620ba9188dc40ac-base
+  #   ports:
+  #     - '4040:4040'
+  #   command: ['ngrok', 'http', 'display:8080', '--authtoken', '${NGROK_AUTH}']
+  #   depends_on:
+  #     - display
+  #   networks:
+  #     - x11
 
-  video:
-    container_name: video
-    image: synthetixio/video:457bb48776c3b14de232d9dda620ba9188dc40ac-base
-    volumes:
-      - ./docker/videos-ci:/videos
-    environment:
-      - FILE_NAME=CI-full-video.mp4
-    depends_on:
-      - display
-    networks:
-      - x11
+  # video:
+  #   container_name: video
+  #   image: synthetixio/video:457bb48776c3b14de232d9dda620ba9188dc40ac-base
+  #   volumes:
+  #     - ./docker/videos-ci:/videos
+  #   environment:
+  #     - FILE_NAME=CI-full-video.mp4
+  #   depends_on:
+  #     - display
+  #   networks:
+  #     - x11
 
 networks:
   x11:
