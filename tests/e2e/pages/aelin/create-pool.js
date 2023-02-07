@@ -16,7 +16,6 @@ export default class CreatePoolPage extends Page {
     super()
     this.header = new Header()
     this.timeLine = new TimeLine()
-    this.UNI_ADDRESS = '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984' // UNI
     // Should be taken from envs
   }
 
@@ -50,6 +49,10 @@ export default class CreatePoolPage extends Page {
 
   getInvestmentTokenModalInput() {
     return cy.get("[data-cy='from-token-modal-input']")
+  }
+
+  getTokenSelectionModalItem() {
+    return cy.get("[data-cy='token-selection-modal-item']")
   }
 
   getInvestmentTokenModalConfirmBtn() {
@@ -99,8 +102,8 @@ export default class CreatePoolPage extends Page {
 
     //Purchase Token
     this.getInvestmentTokenModalButton().click()
-    this.getInvestmentTokenModalInput().type(this.UNI_ADDRESS)
-    this.getInvestmentTokenModalConfirmBtn().click()
+    this.getInvestmentTokenModalInput().type(fakePool.purchaseTokenSymbol)
+    this.getTokenSelectionModalItem().click()
     this.nextStep()
 
     //Investment Deadline

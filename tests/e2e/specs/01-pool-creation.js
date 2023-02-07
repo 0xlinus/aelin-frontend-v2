@@ -1,6 +1,5 @@
 import PoolBuilder from '../builders/poolStepper'
 import CreatePoolPage from '../pages/aelin/create-pool'
-import Header from '../pages/aelin/header'
 
 describe('Complete Pool life cycle', () => {
   let createPoolPage
@@ -9,14 +8,12 @@ describe('Complete Pool life cycle', () => {
   before(() => {
     cy.addMetamaskNetwork({
       networkName: 'Goerli-local',
-      rpcUrl: 'http://anvil:8545',
+      rpcUrl: 'http://0.0.0.0:8545',
       chainId: '5',
       symbol: 'GETH',
       isTestnet: true,
     })
     createPoolPage = new CreatePoolPage()
-    // header = new Header()
-    new Header()
   })
   describe('Create Pool Stepper (public pool)', () => {
     beforeEach(() => {
@@ -48,7 +45,7 @@ describe('Complete Pool life cycle', () => {
       createPoolPage.getSummaryItem('pool-cap').should('have.text', fakePool.poolCap)
       createPoolPage.getSummaryItem('sponsor-fee').should('have.text', fakePool.sponsorFee + '%')
       createPoolPage.getSummaryItem('pool-access').should('have.text', 'Public')
-      createPoolPage.getSummaryInvestmentToken().should('have.text', 'UNI') // Make investment token generic?
+      createPoolPage.getSummaryInvestmentToken().should('have.text', fakePool.purchaseTokenSymbol)
     })
   })
 })

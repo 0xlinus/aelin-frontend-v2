@@ -4,6 +4,8 @@ import format from 'date-fns/format'
 
 import { PoolPrivacy } from '../pages/aelin/create-pool'
 
+const PURCHASE_TOKEN_SYMBOL = ['WETH', 'UNI', 'USDC']
+
 export default class PoolStepperBuilder {
   constructor() {
     this.name = this.createPoolId('E2E')
@@ -19,6 +21,8 @@ export default class PoolStepperBuilder {
     this.totalDeposited =
       this.purchaseTokensAmt >= this.poolCap ? this.poolCap : this.purchaseTokensAmt
     this.creationDate = Date.now()
+    this.purchaseTokenSymbol =
+      PURCHASE_TOKEN_SYMBOL[Math.floor(Math.random() * PURCHASE_TOKEN_SYMBOL.length)]
   }
 
   createPoolId(poolName) {
