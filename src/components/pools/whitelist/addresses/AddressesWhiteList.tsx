@@ -87,12 +87,14 @@ const WhiteListRow = ({
   return (
     <>
       <Textfield
+        data-cy="allowlist-address-input"
         onChange={(e) => onChangeRow(e.target.value, 'address', rowIndex)}
         placeholder="Add address..."
         status={address && !isAddress(address) ? TextfieldState.error : undefined}
         value={address}
       />
       <Textfield
+        data-cy="allowlist-amount-input"
         onChange={(e) => {
           const amount = Number(e.target.value)
 
@@ -232,7 +234,11 @@ const AddressesWhiteList = ({
         Add more rows
       </ButtonPrimaryLightSm>
       {getError(status)}
-      <SaveButton disabled={status !== AddressesWhiteListStatus.valid} onClick={handleSave}>
+      <SaveButton
+        data-cy="allowlist-save-btn"
+        disabled={status !== AddressesWhiteListStatus.valid}
+        onClick={handleSave}
+      >
         Save
       </SaveButton>
       <CancelButton onClick={onClose}>Cancel</CancelButton>
