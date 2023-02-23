@@ -75,7 +75,7 @@ jobs:
             ${{ runner.os }}-buildx-
       - name: Run e2e tests
         run: |
-          docker-compose -f docker-compose.ci.yml up --build --exit-code-from synpress
+          docker-compose -f ./ci/docker-compose.ci.yaml up --build
         env:
           COMPOSE_DOCKER_CLI_BUILD: 1
           DOCKER_BUILDKIT: 1
