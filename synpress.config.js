@@ -1,7 +1,6 @@
-/* eslint-disable */
 const log = require('debug')('synpress:config')
-const path = require('path')
-const packageJson = require('../../package.json')
+// const path = require('path')
+// const packageJson = require('./package.json')
 const { defineConfig } = require('cypress')
 const synpressPath = getSynpressPath()
 log(`Detected synpress root path is: ${synpressPath}`)
@@ -31,6 +30,7 @@ module.exports = defineConfig({
   pageLoadTimeout: process.env.SYNDEBUG ? 9999999 : 30000,
   requestTimeout: process.env.SYNDEBUG ? 9999999 : 30000,
   e2e: {
+    testIsolation: false,
     setupNodeEvents,
     baseUrl: 'http://localhost:3000',
     specPattern: 'tests/e2e/specs/**/*.{js,jsx,ts,tsx}',
@@ -47,6 +47,6 @@ function getSynpressPath() {
   if (process.env.SYNPRESS_LOCAL_TEST) {
     return '.'
   } else {
-    return path.dirname(require.resolve(packageJson.name))
+    return './node_modules/@synthetixio/synpress'
   }
 }
