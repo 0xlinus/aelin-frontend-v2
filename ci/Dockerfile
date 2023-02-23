@@ -1,4 +1,4 @@
-FROM synthetixio/docker-e2e:16.17-ubuntu as base
+FROM synthetixio/docker-e2e:18.13-ubuntu as base
 
 RUN apt install git
 

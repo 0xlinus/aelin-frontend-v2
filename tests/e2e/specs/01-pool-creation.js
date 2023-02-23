@@ -8,7 +8,7 @@ describe('Complete Pool life cycle', () => {
   before(() => {
     cy.addMetamaskNetwork({
       networkName: 'Goerli-local',
-      rpcUrl: 'http://0.0.0.0:8545',
+      rpcUrl: 'http://anvil:8545',
       chainId: '5',
       symbol: 'GETH',
       isTestnet: true,
