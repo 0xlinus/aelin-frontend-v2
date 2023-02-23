@@ -49,6 +49,7 @@ jobs:
 
   e2e:
     needs: build
+    #
     # if: github.ref == 'refs/heads/main'
     #   github.event_name == 'pull_request'
     runs-on: ubuntu-latest
