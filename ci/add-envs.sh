@@ -1,5 +1,13 @@
 #!/bin/bash
 
+file_path="/usr/share/envs/.env.linuz"
+
+while [ ! -f $file_path ]
+do
+  echo "Waiting for file $file_path to exist..."
+  sleep 1
+done
+
 echo "Exporting ENVs for Aelin UI..."
 
 NEXT_PUBLIC_AELIN_POOL_FACTORY=$(grep AelinPoolFactory_address /usr/share/envs/.env.linuz | tail -1 | awk -F "=" '{print $2}')

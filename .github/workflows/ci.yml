@@ -76,7 +76,7 @@ jobs:
             ${{ runner.os }}-buildx-
       - name: Run e2e tests
         run: |
-          docker-compose -f ./ci/docker-compose.ci.yaml up --build
+          docker-compose -f ./ci/docker-compose.ci.yaml up --build --exit-code-from aelin-ui
         env:
           COMPOSE_DOCKER_CLI_BUILD: 1
           DOCKER_BUILDKIT: 1
