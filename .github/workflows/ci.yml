@@ -1,6 +1,9 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches:
+      - main
 
 env:
   NEXT_PUBLIC_GRAPH_ENDPOINT_MAINNET: 'https://api.thegraph.com/subgraphs/name/alextheboredape/aelin-mainnet'
@@ -52,9 +55,6 @@ jobs:
 
   e2e:
     needs: build
-    #
-    # if: github.ref == 'refs/heads/main'
-    #   github.event_name == 'pull_request'
     runs-on: ubuntu-latest
 
     steps:
